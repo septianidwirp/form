@@ -1,111 +1,174 @@
-import Link from 'next/link';
+'use client';
 
-export default function ThankYou() {
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+
+function ThankYouContent() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name') || 'Guest';
+  const firstName = name.split(' ')[0];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full">
-        {/* Desktop & Tablet Layout */}
-        <div className="hidden md:block text-center">
-          <div className="mb-8">
-            <h2 className="text-4xl font-bold text-gray-900 mb-2">MODENA</h2>
-          </div>
-          
-          <h1 className="text-5xl font-bold text-purple-600 mb-2" style={{ fontFamily: 'cursive' }}>
-            Mall
-          </h1>
-          <h1 className="text-5xl font-bold text-purple-500 mb-8" style={{ fontFamily: 'cursive' }}>
-            to Mall
-          </h1>
-          
-          <div className="bg-white rounded-3xl shadow-2xl p-12 mb-8">
-            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            
-            <h2 className="text-3xl font-bold text-purple-600 mb-4">
-              HI ELISA!
-            </h2>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-8">
-              welcome to
-            </h3>
-            
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto">
-              Get ready to explore, experience, and enjoy a journey full of style, innovation, and exclusive surprises.
-            </p>
-            
-            <Link 
-              href="/"
-              className="inline-block bg-gradient-to-r from-purple-600 to-purple-700 text-white px-12 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg"
-            >
-              Kembali ke Beranda
-            </Link>
-          </div>
-          
-          {/* Product Images */}
-          <div className="relative h-64 mx-auto max-w-3xl">
-            <div className="absolute bottom-0 left-1/4 w-24 h-28 bg-gray-200 rounded-2xl shadow-lg"></div>
-            <div className="absolute bottom-0 left-1/3 w-32 h-40 bg-gray-300 rounded-2xl shadow-lg"></div>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-36 bg-gray-400 rounded-full shadow-lg"></div>
-            <div className="absolute bottom-0 right-1/4 w-40 h-56 bg-gray-400 rounded-2xl shadow-lg"></div>
-          </div>
+    <div className="min-h-screen relative">
+      {/* Background Images */}
+      <div className="absolute inset-0 z-0">
+        {/* Desktop Background */}
+        <div className="hidden md:block w-full h-full">
+          <Image
+            src="/images/bg-thanks-dekstop.png"
+            alt="Desktop Background"
+            width={1440}
+            height={1024}
+            className="w-full h-auto min-h-screen"
+            priority
+          />
         </div>
 
-        {/* Mobile Layout */}
-        <div className="md:hidden">
-          <div className="bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl p-6 mb-6">
-            <div className="text-right mb-4">
-              <h2 className="text-2xl font-bold text-gray-900">MODENA</h2>
-            </div>
-            
-            <h1 className="text-4xl font-bold text-purple-600 mb-1" style={{ fontFamily: 'cursive' }}>
-              Mall
-            </h1>
-            <h1 className="text-4xl font-bold text-purple-500 mb-6" style={{ fontFamily: 'cursive' }}>
-              to Mall
-            </h1>
-            
-            <div className="bg-white rounded-2xl p-6 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
+        {/* Mobile Background */}
+        <div className="md:hidden absolute inset-0 z-0">
+          <Image
+            src="/bg-mobile.svg"
+            alt="Mobile Background"
+            width={375}
+            height={812}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="w-full max-w-6xl px-4 mx-auto">
+          {/* Desktop & Tablet Layout */}
+          <div className="hidden md:flex flex-col items-center min-h-screen justify-center">
+            {/* Text Content */}
+            <div className="text-center mb-16">
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '200px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  paddingTop: '50px',
+                }}
+              >
+                <h2
+                  style={{
+                    width: '154px',
+                    height: '38px',
+                    fontFamily: 'Modena Sans, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '32px',
+                    letterSpacing: '-3%',
+                    color: '#8B4E9A',
+                    opacity: 1,
+                    textAlign: 'center',
+                    margin: 0,
+                  }}
+                >
+                  HI {firstName}!
+                </h2>
+
+                <h3
+                  style={{
+                    width: '200px',
+                    fontFamily: 'Modena Sans, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '32px',
+                    letterSpacing: '-3%',
+                    color: '#8B4E9A',
+                    opacity: 1,
+                    textAlign: 'center',
+                    whiteSpace: 'nowrap',
+                    margin: '10px 0 0 0',
+                  }}
+                >
+                  welcome to
+                </h3>
               </div>
-              
-              <h2 className="text-2xl font-bold text-purple-600 mb-2">
-                HI ELISA!
+
+              <div className="mb-6">
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '-50px',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  <Image
+                    src="/logo.svg"
+                    alt="MODENA Logo"
+                    width={175}
+                    height={45.21}
+                  />
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '10px',
+                  }}
+                >
+                  <Image
+                    src="/maltomal.svg"
+                    alt="Maltomal Logo"
+                    width={208.4}
+                    height={156.1}
+                  />
+                </div>
+              </div>
+
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+                Get ready to explore, experience, and enjoy a journey
+                <br />
+                full of style, innovation, and exclusive surprises.
+              </p>
+            </div>
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="md:hidden flex flex-col">
+            <div className="relative w-full flex flex-col items-center justify-start pt-6 pb-12">
+              <h2 className="text-[32px] font-semibold text-[#8B4E9A] mb-2 text-center">
+                HI {firstName}!
               </h2>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-[32px] font-semibold text-[#8B4E9A] mb-4 text-center">
                 welcome to
               </h3>
-              
-              <p className="text-sm text-gray-600 mb-6">
+              <Image src="/logo.svg" alt="MODENA Logo" width={175} height={45} className="mb-4" />
+              <Image src="/maltomalmobile.svg" alt="Maltomal Logo" width={208} height={156} className="mb-6" />
+              <p className="text-[20px] font-normal text-[#2E2E2E] leading-relaxed text-center max-w-[320px]">
                 Get ready to explore, experience, and enjoy a journey full of style, innovation, and exclusive surprises.
               </p>
             </div>
           </div>
-          
-          <Link 
-            href="/"
-            className="block w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg text-center"
-          >
-            Kembali ke Beranda
-          </Link>
-          
-          {/* Mobile Product Images */}
-          <div className="mt-8 relative h-40">
-            <div className="absolute bottom-0 left-0 w-16 h-20 bg-gray-200 rounded-2xl"></div>
-            <div className="absolute bottom-0 left-20 w-20 h-28 bg-gray-300 rounded-2xl"></div>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-14 h-28 bg-gray-400 rounded-full"></div>
-            <div className="absolute bottom-0 right-0 w-28 h-40 bg-gray-400 rounded-2xl"></div>
-          </div>
-        </div>
-        
-        <div className="text-center mt-8">
-          <p className="text-xs text-gray-400">M care 15.007.15</p>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ThankYou() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading...</p>
+          </div>
+        </div>
+      }
+    >
+      <ThankYouContent />
+    </Suspense>
   );
 }

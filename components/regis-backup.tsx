@@ -76,9 +76,9 @@ export default function RegistrationForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center mt-4 md:mt-8 space-y-4">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center mt-8 space-y-4">
         {/* Input Nama */}
-        <div className="w-full max-w-[345px] px-4 md:px-0">
+        <div className="w-[345px]">
           <input
             type="text"
             placeholder="Masukkan nama lengkap"
@@ -90,24 +90,27 @@ export default function RegistrationForm() {
         </div>
 
         {/* Input Nomor Telepon */}
-        <div className="w-full max-w-[345px] px-4 md:px-0">
+        <div className="w-[345px]">
+
           <input
-            type="tel"
-            placeholder="Input your phone number"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            required
-            className="w-full h-[47px] pl-6 pr-6 rounded-full border border-gray-200 bg-white text-gray-700 placeholder-gray-400 text-sm focus:outline-none focus:border-purple-400 shadow-sm"
+  type="tel"
+  name="phone"
+  placeholder="Input your phone number"
+  value={formData.phone}
+  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+  required
+  pattern="[0-9]{9,13}"
+  title="Masukkan nomor telepon 9–13 digit angka tanpa spasi atau simbol"
+  className="w-full h-[47px] pl-6 pr-6 rounded-full border border-gray-200 bg-white text-gray-700 placeholder-gray-400 text-sm focus:outline-none focus:border-purple-400 shadow-sm"
           />
         </div>
 
         {/* Tombol Submit */}
-        <div className="w-full max-w-[345px] px-4 md:px-0">
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full h-[47px] bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-[345px] h-[47px] bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           {loading ? (
             <span className="flex items-center justify-center">
               <svg
@@ -136,7 +139,6 @@ export default function RegistrationForm() {
             "Daftar Sekarang"
           )}
         </button>
-        </div>
       </form>
       
       <Modal
